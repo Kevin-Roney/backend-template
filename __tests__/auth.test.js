@@ -1,4 +1,4 @@
-const { setupDb, signUpUser } = require('./utils.js');
+const { setupDb, signUpUser } = require('../utils.js');
 const request = require('supertest');
 const app = require('../lib/app');
 
@@ -8,7 +8,7 @@ describe('/api/v1/auth', () => {
     expect(1).toEqual(1);
   });
 
-  it.skip('/signup', async () => {
+  it('/signup', async () => {
     const { agent, user, credentials } = await signUpUser();
 
     expect(user).toEqual({
@@ -20,7 +20,7 @@ describe('/api/v1/auth', () => {
     expect(statusCode).toBe(200);
   });
 
-  it.skip('/signup with duplicate email', async () => {
+  it('/signup with duplicate email', async () => {
     await signUpUser();
     const { res } = await signUpUser();
     expect(res.statusCode).toBe(400);
@@ -30,7 +30,7 @@ describe('/api/v1/auth', () => {
     });
   });
 
-  it.skip('/signin', async () => {
+  it('/signin', async () => {
     const { credentials } = await signUpUser();
 
     const agent = request.agent(app);
@@ -45,7 +45,7 @@ describe('/api/v1/auth', () => {
     expect(statusCode).toBe(200);
   });
 
-  it.skip('/signin bad email, bad password', async () => {
+  it('/signin bad email, bad password', async () => {
     const { credentials } = await signUpUser();
 
     const res = await request(app)
@@ -69,7 +69,7 @@ describe('/api/v1/auth', () => {
     });
   });
 
-  it.skip('/signout', async () => {
+  it('/signout', async () => {
     const { agent } = await signUpUser();
 
     const { body } = await agent.delete('/api/v1/auth/signout');

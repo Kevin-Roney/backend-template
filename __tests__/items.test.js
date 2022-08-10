@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { setupDb, signUpUser } = require('./utils.js');
+const { setupDb, signUpUser } = require('../utils.js');
 const app = require('../lib/app');
 
 describe('/api/v1/items', () => {
@@ -8,7 +8,7 @@ describe('/api/v1/items', () => {
     expect(1).toEqual(1);
   });
 
-  it.skip('POST / creates a new shopping item with the current user', async () => {
+  it('POST / creates a new shopping item with the current user', async () => {
     const { agent, user } = await signUpUser();
 
     const newItem = { description: 'eggs', qty: 12 };
@@ -23,7 +23,7 @@ describe('/api/v1/items', () => {
     });
   });
 
-  it.skip('GET / returns all items associated with the authenticated User', async () => {
+  it('GET / returns all items associated with the authenticated User', async () => {
     // create a user
     const { agent } = await signUpUser();
     const { body: user1Item } = await agent.post('/api/v1/items').send({
@@ -50,7 +50,7 @@ describe('/api/v1/items', () => {
     expect(resp2.body).toEqual([user2Item]);
   });
 
-  it.skip('GET /:id should get an item', async () => {
+  it('GET /:id should get an item', async () => {
     const { agent } = await signUpUser();
 
     const { body: item } = await agent.post('/api/v1/items').send({
@@ -64,12 +64,12 @@ describe('/api/v1/items', () => {
     expect(got).toEqual(item);
   });
 
-  it.skip('GET / should return a 401 if not authenticated', async () => {
+  it('GET / should return a 401 if not authenticated', async () => {
     const { status } = await request(app).get('/api/v1/items');
     expect(status).toEqual(401);
   });
 
-  it.skip('UPDATE /:id should update an item', async () => {
+  it('UPDATE /:id should update an item', async () => {
     const { agent } = await signUpUser();
 
     const { body: item } = await agent.post('/api/v1/items').send({
@@ -85,7 +85,7 @@ describe('/api/v1/items', () => {
     expect(updated).toEqual({ ...item, bought: true });
   });
 
-  it.skip('UPDATE /:id should 403 for invalid users', async () => {
+  it('UPDATE /:id should 403 for invalid users', async () => {
     const { agent } = await signUpUser();
 
     const { body: item } = await agent.post('/api/v1/items').send({
@@ -109,7 +109,7 @@ describe('/api/v1/items', () => {
     });
   });
 
-  it.skip('DELETE /:id should delete items for valid user', async () => {
+  it('DELETE /:id should delete items for valid user', async () => {
     const { agent } = await signUpUser();
 
     const { body: item } = await agent.post('/api/v1/items').send({
