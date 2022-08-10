@@ -4,6 +4,9 @@ const app = require('../lib/app');
 
 describe('/api/v1/items', () => {
   beforeEach(setupDb);
+  it('example test - delete me!', () => {
+    expect(1).toEqual(1);
+  });
 
   it.skip('POST / creates a new shopping item with the current user', async () => {
     const { agent, user } = await signUpUser();

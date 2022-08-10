@@ -4,6 +4,9 @@ const app = require('../lib/app');
 
 describe('/api/v1/auth', () => {
   beforeEach(setupDb);
+  it('example test - delete me!', () => {
+    expect(1).toEqual(1);
+  });
 
   it.skip('/signup', async () => {
     const { agent, user, credentials } = await signUpUser();
